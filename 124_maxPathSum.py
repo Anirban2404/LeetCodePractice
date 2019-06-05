@@ -1,41 +1,45 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Sat Jun  1 11:17:51 2019
+Created on Wed Jun  5 11:38:25 2019
 
 @author: anirban-mac
 """
 
 """
-104. Maximum Depth of Binary Tree
+124. Binary Tree Maximum Path Sum
+Given a non-empty binary tree, find the maximum path sum.
 
-Given a binary tree, find its maximum depth.
+For this problem, a path is defined as any sequence of nodes from some starting node to any node in the tree along the parent-child connections. The path must contain at least one node and does not need to go through the root.
 
-The maximum depth is the number of nodes along the longest path from the root 
-node down to the farthest leaf node.
+Example 1:
 
-Note: A leaf is a node with no children.
+Input: [1,2,3]
 
-Example:
+       1
+      / \
+     2   3
 
-Given binary tree [3,9,20,null,null,15,7],
+Output: 6
+Example 2:
 
-    3
+Input: [-10,9,20,null,null,15,7]
+
+   -10
    / \
   9  20
     /  \
    15   7
-return its depth = 3.
 
+Output: 42
 """
 class TreeNode:
     def __init__(self, x):
         self.val = x
         self.left = None
         self.right = None
-
+        
 class Solution:
-
     def stringToTreeNode(self,inputValues):
       
         root = TreeNode(int(inputValues[0]))
@@ -79,22 +83,26 @@ class Solution:
             self.prettyPrintTree(node.left, prefix + ("    " if isLeft else "│   "), True)
 
     
-    
-    def maxDepth(self, root):
+    def maxPathSum(self, root):
         """
         :type root: TreeNode
         :rtype: int
         """
+        self.max_sum = float('-inf')
+        def pathSum(node):
+            if node is None:
+                return 0
+            leftSum = max(pathSum(node.left), 0)
+            rightSum = max(pathSum(node.right), 0)
+            
+            nodeSum = node.val + leftSum + rightSum
+            self.max_sum = max(self.max_sum, nodeSum)
+            return node.val + max(leftSum,rightSum)
         
-        if root is None:
-            return 0
-        left = self.maxDepth(root.left)
-        right = self.maxDepth(root.right)
-        return max(left,right) + 1
+        pathSum(root)
+        return self.max_sum
         
-        
-        
-treelist = [3,9,'null',20,15,7,2]
+treelist = [1,-2,-3,1,3,-2,'null',-1]
 treeNode = Solution().stringToTreeNode(treelist)
 Solution().prettyPrintTree(treeNode,"",True)
-print(Solution().maxDepth(treeNode))
+print(Solution().maxPathSum(treeNode))

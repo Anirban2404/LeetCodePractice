@@ -45,30 +45,24 @@ class Solution:
         :rtype: bool
         """
        
-        if len(s)%2!=0:
+        if len(s)%2 !=0:
             return False
+        stack = []
+        brackets = {')':'(', 
+                    '}':'{',
+                    ']':'['
+                   }
         
-        else:
-            stack = []
-            brackets = {")":"(",
-                        "}":"{",
-                        "]":"[",
-                        }
-            for char in s:
-                if char in brackets and len(stack)>0:
-                    #print (char, brackets[char])
-                    if brackets[char] == stack[-1]:
-                        #print (char, brackets[char])
-                        stack.pop()
-                    else:
-                        stack.append(char)
-                else:
-                    stack.append(char)
-                  
-        if len(stack)==0:
-            return True
-        else:
-            return False
+        for bracket in s:
+            print("->", stack)
+            if bracket in brackets:
+                top = stack.pop() if stack else "#"
+                print("Top", top)
+                if brackets[bracket] != top:
+                    return False
+            else:
+                stack.append(bracket)
+        return not stack
 
-s = "){"     
+s = "({})({{}})({}[])"     
 print(Solution().isValid(s))

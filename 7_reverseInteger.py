@@ -19,23 +19,22 @@ class Solution:
         :type x: int
         :rtype: int
         """
-        reversednumber = 0
+        reversedInteger = 0
         number = x
         if (x > 2147483647 or x < -2147483648):
-            return 0;
-        if x < 0:
-            x= -x
-        while(x>=1):
-            rem = int(x % 10)
-            reversednumber = reversednumber*10 + rem
-            x = x/10
-        #print(reversednumber)
-        if (reversednumber > 2147483647 or reversednumber < -2147483648):
             return 0
-        if number>=0:
-            return reversednumber
+        if x < 0:
+            x = -x
+        while x >= 1:
+            reversedInteger = reversedInteger * 10 + x % 10
+            x = x // 10
+        if (reversedInteger > 2147483647 or reversedInteger < -2147483648):
+            return 0
+        if number >= 0:
+            return reversedInteger
         else:
-            return -reversednumber
+            return -reversedInteger
+            
 
-x = 1534236469
+x = 14236469
 print(Solution().reverse(x))
