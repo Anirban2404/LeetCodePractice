@@ -24,7 +24,7 @@ target = 3
 Output: true
 """
 class Solution:
-    def searchMatrix(self, matrix, target):
+    def searchMatrixNaive(self, matrix, target):
         """
         :type matrix: List[List[int]]
         :type target: int
@@ -43,6 +43,36 @@ class Solution:
 
         return False
                 
-matrix = [[]]
-target = 1
+    def searchMatrix(self, matrix, target):
+        """
+        :type matrix: List[List[int]]
+        :type target: int
+        :rtype: bool
+        """
+        if not matrix or not matrix[0]:
+            return False
+
+        left, right = 0, len(matrix)*len(matrix[0])
+
+        while left<right:
+            mid = (int)((left+right)/2)
+            i = (int)(mid/len(matrix[0]))
+            j = (int)(mid%len(matrix[0]))
+
+            if matrix[i][j]==target:
+                return True
+            elif matrix[i][j]>target:
+                right = mid
+            else:
+                left = mid + 1
+    
+        return False
+
+matrix = matrix = [
+   [ 1,  5,  9],
+   [10, 11, 13],
+   [12, 13, 17],
+   [14, 16, 18]
+]
+target = 16
 print(Solution().searchMatrix(matrix,target))
