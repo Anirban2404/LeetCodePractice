@@ -8,7 +8,9 @@ Created on Thu Jun  6 18:30:39 2019
 
 """
 399. Evaluate Division
-Equations are given in the format A / B = k, where A and B are variables represented as strings, and k is a real number (floating point number). Given some queries, return the answers. If the answer does not exist, return -1.0.
+Equations are given in the format A / B = k, where A and B are variables 
+represented as strings, and k is a real number (floating point number). 
+Given some queries, return the answers. If the answer does not exist, return -1.0.
 
 Example:
 Given a / b = 2.0, b / c = 3.0.
@@ -34,3 +36,8 @@ class Solution:
         :type queries: List[List[str]]
         :rtype: List[float]
         """
+        
+equations = [["a","b"],["b","c"]]
+values = [2.0,3.0]
+queries = [["a","c"],["b","a"],["a","e"],["a","a"],["x","x"]]
+print(Solution().calcEquation(equations, values, queries))
