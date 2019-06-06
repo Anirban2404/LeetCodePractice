@@ -38,8 +38,8 @@ class Solution:
             localmax = max(x, localmax * x)
             localmin = min(x, localmin * x)
             maxproduct = max(maxproduct, localmax)
-            
+            print(localmax, localmin, maxproduct)
         return maxproduct
 
-nums = [2,3,-2,4]
+nums = [2,3,-2,-6]
 print(Solution().maxProduct(nums))

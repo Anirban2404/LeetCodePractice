@@ -41,22 +41,39 @@ class Solution(object):
         :rtype: int
         """
       
-        people = (i for i, seat in enumerate(seats) if seat)
-        prev, future = None, next(people)
-        
-        ans = 0
-        for i, seat in enumerate(seats):
-            if seat:
+#        people = (i for i, seat in enumerate(seats) if seat)
+#        print(people)
+#        prev, future = None, next(people)
+#        
+#        ans = 0
+#        for i, seat in enumerate(seats):
+#            if seat:
+#                prev = i
+#            else:
+#                while future is not None and future < i:
+#                    future = next(people, None)
+#
+#                left = float('inf') if prev is None else i - prev
+#                right = float('inf') if future is None else future - i
+#                ans = max(ans, min(left, right))
+#
+#        return ans
+        prev = -1
+        future = 0
+        mingap = gap = 0
+        L = len(seats)
+        for i in range(L):
+            if seats[i] == 1:
                 prev = i
             else:
-                while future is not None and future < i:
-                    future = next(people, None)
-
-                left = float('inf') if prev is None else i - prev
-                right = float('inf') if future is None else future - i
-                ans = max(ans, min(left, right))
-
-        return ans
-    
-seats = [1,0,0,1]
+                while future < L and (seats[future] == 0 or future < i):
+                    future += 1
+                left = float('inf') if prev == -1 else i - prev
+                right = float('inf') if future == L  else future - i
+                gap = min(left, right)
+                mingap = max(mingap, gap)
+              
+        return mingap
+        
+seats = [1,0,0,0]
 print(Solution().maxDistToClosest(seats))
