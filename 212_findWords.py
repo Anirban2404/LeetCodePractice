@@ -100,6 +100,7 @@ class Solution:
             self.dfs(board, node, m, n, x, y, path+tmp, res)
             print(res)
         board[i][j] = tmp
+        return res
         
         
 board = [
@@ -109,6 +110,6 @@ board = [
   ['i','f','l','v']
 ]
 words = ["oath","pea","eat","rain"]
-board = [["a"]]
-words = ["a"]
+#board = [["a"]]
+#words = ["a"]
 print(Solution().findWords(board, words))

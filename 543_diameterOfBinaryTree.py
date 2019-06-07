@@ -1,28 +1,29 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Fri May 31 20:01:14 2019
+Created on Thu Jun  6 23:38:07 2019
 
 @author: anirban-mac
 """
-
 """
-144. Binary Tree Preorder Traversal
-Given a binary tree, return the preorder traversal of its nodes' values.
+543. Diameter of Binary Tree
+
+Given a binary tree, you need to compute the length of the diameter of the tree. 
+The diameter of a binary tree is the length of the longest path between any two 
+nodes in a tree. This path may or may not pass through the root.
 
 Example:
+Given a binary tree 
+          1
+         / \
+        2   3
+       / \     
+      4   5    
+Return 3, which is the length of the path [4,2,1,3] or [5,2,1,3].
 
-Input: [1,null,2,3]
-   1
-    \
-     2
-    /
-   3
-
-Output: [1,2,3]
-Follow up: Recursive solution is trivial, could you do it iteratively?
+Note: The length of path between two nodes is represented by the number of 
+edges between them.
 """
-
 # Definition for a binary tree node.
 class TreeNode:
     def __init__(self, x):
@@ -72,29 +73,20 @@ class Solution:
         if node.left:
             self.prettyPrintTree(node.left, prefix + ("    " if isLeft else "│   "), True)
             
-
-    def preorderTraversal(self, root):
-        """
-        :type root: TreeNode
-        :rtype: List[int]
-        """
-        if root is None: 
-            return []
-        stack = [root]
-        preOrder = []
-        while stack:
-            root = stack.pop()
-            if root:
-                preOrder.append(root.val)
-                if root.right:
-                    stack.append(root.right)
-                if root.left:
-                    stack.append(root.left)
-        return preOrder
-        
-        
             
-treelist = [1,'null',2,3]
+    def diameterOfBinaryTree(self, root: TreeNode) -> int:
+        self.max_depth = 1
+        def get_depth(node):
+            if node is None:
+                return 0
+            leftDepth = get_depth(node.left)
+            rightDepth = get_depth(node.right)
+            self.max_depth = max(self.max_depth, leftDepth + rightDepth + 1)
+            return max(leftDepth,rightDepth) + 1
+        get_depth(root)
+        return self.max_depth - 1
+    
+treelist = [1,2,3,4,5]
 treeNode = Solution().stringToTreeNode(treelist)
 Solution().prettyPrintTree(treeNode,"",True)
-print(Solution().preorderTraversal(treeNode))
+print(Solution().diameterOfBinaryTree(treeNode))

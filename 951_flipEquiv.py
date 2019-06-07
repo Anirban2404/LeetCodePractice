@@ -1,28 +1,32 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Fri May 31 20:01:14 2019
+Created on Fri Jun  7 10:53:44 2019
 
 @author: anirban-mac
 """
 
 """
-144. Binary Tree Preorder Traversal
-Given a binary tree, return the preorder traversal of its nodes' values.
+951. Flip Equivalent Binary Trees
+For a binary tree T, we can define a flip operation as follows: choose any node,
+and swap the left and right child subtrees.
 
-Example:
+A binary tree X is flip equivalent to a binary tree Y if and only if we can make 
+X equal to Y after some number of flip operations.
 
-Input: [1,null,2,3]
-   1
-    \
-     2
-    /
-   3
+Write a function that determines whether two binary trees are flip equivalent.  
+The trees are given by root nodes root1 and root2.
 
-Output: [1,2,3]
-Follow up: Recursive solution is trivial, could you do it iteratively?
+ 
+
+Example 1:
+
+Input: root1 = [1,2,3,4,5,6,null,null,null,7,8], root2 = [1,3,2,null,6,4,5,null,
+null,null,null,8,7]
+Output: true
+Explanation: We flipped at nodes with values 1, 3, and 5.
+Flipped Trees Diagram
 """
-
 # Definition for a binary tree node.
 class TreeNode:
     def __init__(self, x):
@@ -33,7 +37,7 @@ class TreeNode:
 class Solution:
     def stringToTreeNode(self,inputValues):
       
-        root = TreeNode(int(inputValues[0]))
+        root = TreeNode(inputValues[0])
         nodeQueue = [root]
         front = 0
         index = 1
@@ -73,28 +77,28 @@ class Solution:
             self.prettyPrintTree(node.left, prefix + ("    " if isLeft else "│   "), True)
             
 
-    def preorderTraversal(self, root):
+    def flipEquiv(self, root1, root2):
         """
-        :type root: TreeNode
-        :rtype: List[int]
+        :type root1: TreeNode
+        :type root2: TreeNode
+        :rtype: bool
         """
-        if root is None: 
-            return []
-        stack = [root]
-        preOrder = []
-        while stack:
-            root = stack.pop()
-            if root:
-                preOrder.append(root.val)
-                if root.right:
-                    stack.append(root.right)
-                if root.left:
-                    stack.append(root.left)
-        return preOrder
+
+        if root1 is root2:
+            return True
+        if not root1 or not root2 or root1.val != root2.val:
+            return False
+
+        return (self.flipEquiv(root1.left, root2.left) and
+                self.flipEquiv(root1.right, root2.right) or
+                self.flipEquiv(root1.left, root2.right) and
+                self.flipEquiv(root1.right, root2.left))
         
         
-            
-treelist = [1,'null',2,3]
-treeNode = Solution().stringToTreeNode(treelist)
-Solution().prettyPrintTree(treeNode,"",True)
-print(Solution().preorderTraversal(treeNode))
+root1 = [1,2,3,4,5,6,'null','null','null',7,8]
+root2 = [1,3,2,'null',6,4,5,'null','null','null','null',8,7]
+treeNode1 = Solution().stringToTreeNode(root1)
+treeNode2 = Solution().stringToTreeNode(root2)
+Solution().prettyPrintTree(treeNode1,"",True)
+Solution().prettyPrintTree(treeNode2,"",True)
+print(Solution().flipEquiv(treeNode1, treeNode2))
