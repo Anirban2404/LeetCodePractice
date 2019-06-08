@@ -43,7 +43,7 @@ Note:
 1 <= wage[i] <= 10000
 Answers within 10^-5 of the correct answer will be considered correct.
 """
-
+import heapq
 class Solution:
     def mincostToHireWorkers(self, quality, wage, K):
         """
@@ -52,19 +52,29 @@ class Solution:
         :type K: int
         :rtype: float
         """
-        ratio = []
-        for i in range(len(quality)):
-            ratio.append(quality[i]/wage[i])
-            
-        print(ratio)
-        sortedratio = sorted(ratio)[:K]
-        print(sortedratio)
-        
-        print(ratio.index(sortedratio[K-1]))
+        workers = sorted([float(w) / q, q] for w, q in zip(wage, quality))
+        print(workers)
+        res = float('inf')
+        qsum = 0
+        heap = []
+        for r, q in workers:
+            print(r,q)
+            heapq.heappush(heap, -q)
+            qsum += q
+            print("sum-->", qsum)
+            if len(heap) > K: 
+                top = heapq.heappop(heap)
+                print("-->", top)
+                qsum += top
+                print("::>", float(qsum))
+            if len(heap) == K: 
+                res = min(res, qsum * r)
+            print(";;-->",res)
+        return res
         
        
-quality = [3,3,1,10,10,1] 
-wage = [10,4,8,2,2,7]
-K = 3
+quality = [10,20,5]
+wage = [70,50,30]
+K = 2
         
 print(Solution().mincostToHireWorkers(quality, wage, K))
