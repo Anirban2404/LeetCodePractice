@@ -17,7 +17,9 @@ Given a / b = 2.0, b / c = 3.0.
 queries are: a / c = ?, b / a = ?, a / e = ?, a / a = ?, x / x = ? .
 return [6.0, 0.5, -1.0, 1.0, -1.0 ].
 
-The input is: vector<pair<string, string>> equations, vector<double>& values, vector<pair<string, string>> queries , where equations.size() == values.size(), and the values are positive. This represents the equations. Return vector<double>.
+The input is: vector<pair<string, string>> equations, vector<double>& values, 
+vector<pair<string, string>> queries , where equations.size() == values.size(), 
+and the values are positive. This represents the equations. Return vector<double>.
 
 According to the example above:
 
@@ -26,7 +28,8 @@ values = [2.0, 3.0],
 queries = [ ["a", "c"], ["b", "a"], ["a", "e"], ["a", "a"], ["x", "x"] ]. 
  
 
-The input is always valid. You may assume that evaluating the queries will result in no division by zero and there is no contradiction.
+The input is always valid. You may assume that evaluating the queries will 
+result in no division by zero and there is no contradiction.
 """
 
 from collections import defaultdict
@@ -40,7 +43,29 @@ class Solution:
         :rtype: List[float]
         """
 
-        
+        def dfs (start, end, path, paths):
+            if start == end and start in G:
+                paths[0] = path
+                return 
+            if start in vis:
+                return
+            vis.add(start)
+            for node in G[start]:
+                dfs(node, end, path * W[start, node], paths)
+            
+        G = defaultdict(set)
+        W = defaultdict(float)
+        for (A, B), V in zip(equations , values):
+            G[A] , G[B] = G[A] | {B}, G[B] | {A}
+            W[A,B] , W[B,A] = V, 1.0 / V
+        res = []
+        for x,y in queries:
+            paths, vis = [-1.0], set()
+            dfs(x, y, 1.0, paths)
+            res += paths[0],
+        return res
+            
+            
 equations = [["a","b"],["b","c"]]
 values = [2.0,3.0]
 queries = [["a","c"],["b","a"],["a","e"],["a","a"],["x","x"]]

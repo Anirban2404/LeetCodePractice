@@ -35,7 +35,7 @@ class Solution:
         if start > end:
             result.append(''.join(item))
             return
-
+        print(item, start, end)
         for key in dic:
             if start == end and key in ('6','9'):
                 continue
@@ -48,5 +48,5 @@ class Solution:
             self.helper(result, item, start+1, end-1, dic)
         return
     
-n = 15
+n = 3
 print(Solution().findStrobogrammatic(n))
