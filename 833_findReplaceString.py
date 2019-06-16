@@ -69,6 +69,6 @@ class Solution:
             
 S = "abcd"
 indexes = [0,2]
-sources = ["a","cd"]
+sources = ["ab","ec"]
 targets = ["eee","ffff"]
 print(Solution().findReplaceString(S, indexes, sources, targets))
