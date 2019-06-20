@@ -51,16 +51,16 @@ class Solution:
         for num in nums:
             products.append(product)
             product = product * num
-            #print(product)
-        #print(products)
+            print(product)
+        print(products)
         
         product = 1
         for i in range(len(nums)-1,-1,-1):
-            #print(nums[i], products[i], product)
+            print(nums[i], products[i], product)
             products[i] = products[i] * product
             product = product * nums[i]
             
         return (products)
         
-nums = [5,2,3,4]
+nums = [1,2,3,4]
 print(Solution().productExceptSelf(nums))
