@@ -51,8 +51,10 @@ class Solution:
 
         def sortLog(log):
             id_, rest = log.split(" ", 1)
+            print(id_, rest)
             return (0, rest, id_) if rest[0].isalpha() else (1,)
         print(sorted(logs))
+        print()
         return sorted(logs, key = sortLog)
     
 logs = ["a1 9 2 3 1","g1 act car","zo4 4 7","ab1 off key dog","a8 act zoo"]
