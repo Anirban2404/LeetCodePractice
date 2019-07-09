@@ -29,8 +29,26 @@ class Solution:
         :type word2: str
         :rtype: int
         """
-
+        index1, index2 = -1, -1
+        shortest = len(words)
+        
+        if word1 not in words or word2 not in words:
+            return -1
+        
+        for i, word in enumerate(words):
+            if word == word1:
+                index1 = i
+            if word == word2:
+                index2 = i
+            if index1 > -1 and index2 > -1: 
+                shortest = min(shortest, abs(index1 - index2))
+            #print(shortest, index1, index2)
+        return shortest
+#
+#words = ["a","c","b","a"]
+#word1 = "a"
+#word2 = "b"
 words = ["practice", "makes", "perfect", "coding", "makes"]
-word1 = "coding"
-word2 = "practice"
+word1 = "practice"
+word2 = "coding"
 print(Solution().shortestDistance(words, word1, word2))
