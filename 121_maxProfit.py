@@ -52,15 +52,15 @@ class Solution:
         :rtype: int
         """
 
-        maxprofit = 0
-        minprice = float('inf')
-        for i in range(0, len(prices)):
-            if (prices[i] < minprice):
-                minprice = prices[i]
-            elif (prices[i] - minprice > maxprofit):
-                maxprofit = prices[i] - minprice;
-        
-        return maxprofit;
+        min_price_local = float('-inf')
+        max_profit_local, max_profit = 0, 0
+    
+        for price in prices:
+            min_price_local = min(min_price_local, price)
+            max_profit_local = max(max_profit_local, price - min_price_local)
+            max_profit = max(max_profit, max_profit_local)
+       
+        return max_profit
             
         
 prices = [7,1,5,3,6,4]
