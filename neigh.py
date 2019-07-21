@@ -62,12 +62,9 @@ class Solution:
                     curC -= 1
                 else:
                     pos[idx_pos] += 1 
-        print(pos, idx_pos)         
-        for i in range(len(pos)):
-            if(pos[i] == 1): 
-                return -1
+        print(pos, idx_pos)  
         return maxC
 
         
-A = "neigneighh"
+A = "neigneiggh"
 print(Solution().solveneigh(A))
