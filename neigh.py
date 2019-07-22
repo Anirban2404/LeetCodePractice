@@ -36,35 +36,36 @@ class Solution:
     # @return an integer
     def solveneigh(self, A):
         word = "neigh"
-        charPos = {val: key for key,val in enumerate(word)}
-        print(charPos)
-        pos = [0] * (len(word))
+        charDict = {val: key for key,val in enumerate(word)}
+        print(charDict)
+        dp = [0] * (len(word))
         maxC = curC = 0
         
-        if charPos[A[0]] != 0 or len(A) % len(word) != 0:
+        #Invalid Cases
+        if len(A) % len(word) != 0 or A[0] != word[0]:
             return -1
         
         for i in range(len(A)):
             #print(A[i])
-            if A[i] not in charPos:
+            if A[i] not in charDict:
                 return -1
-            idx_pos = charPos[A[i]]
-            print(pos, idx_pos)
-            if idx_pos == 0:
+            idx = charDict[A[i]]
+            print(dp, idx)
+            if idx == 0:
                 curC += 1
                 maxC = max(maxC, curC)
-                pos[0] += 1
+                dp[0] += 1
             else:
-                if (pos[idx_pos - 1] == 0):
+                if (dp[idx - 1] == 0):
                     return -1
-                pos[idx_pos - 1] -= 1
-                if idx_pos == len(word) - 1:
+                dp[idx - 1] -= 1
+                if idx == len(word) - 1:
                     curC -= 1
                 else:
-                    pos[idx_pos] += 1 
-        print(pos, idx_pos)  
+                    dp[idx] += 1 
+        print(dp, idx)  
         return maxC
 
         
-A = "neigneiggh"
+A = "neigneihgh"
 print(Solution().solveneigh(A))
