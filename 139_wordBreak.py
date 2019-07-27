@@ -47,8 +47,9 @@ class Solution:
                 for j in range(i, len(s)):
                     if s[i:j+1] in wordDict:
                         dp[j+1] = True
+            print(dp)
         return dp[-1]
         
-s = "catsandog"
+s = "catsanddog"
 wordDict = ["cats", "dog", "sand", "and", "cat"]
 print(Solution().wordBreak(s, wordDict))
