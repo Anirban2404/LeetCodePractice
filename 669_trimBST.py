@@ -122,16 +122,14 @@ class Solution:
     def trim_BST(self, root, L, R):
         if not root:
             return None
+        root.left = self.trim_BST(root.left, L, R)
+        root.right = self.trim_BST(root.right, L, R)
         if L <= root.val <= R:
             return root
         elif root.val < L:
             return root.right
         elif root.val > R:
             return root.left
-        else:
-            root.left = self.trim_BST(root.left, L, R)
-            root.right = self.trim_BST(root.right, L, R)
-            return root
             
         
 treelist = [3,9,20,15,7,2]
