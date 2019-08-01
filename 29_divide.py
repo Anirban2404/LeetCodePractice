@@ -31,13 +31,6 @@ class Solution(object):
         :type divisor: int
         :rtype: int
         """
-        if divisor == 0:
-            return 
-        if (dividend == -2**31 + 1 and divisor == -1): 
-            return -2**31 + 1
-        _dividend = (dividend)
-        _divisor = abs(divisor)
-        res = 0
 
         positive = (dividend < 0) is (divisor < 0)
         dividend, divisor = abs(dividend), abs(divisor)
