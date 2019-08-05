@@ -36,6 +36,7 @@ All edges times[i] = (u, v, w) will have 1 <= u, v <= N and 0 <= w <= 100.
 """
 
 from collections import defaultdict
+import heapq
 class Solution:
     def networkDelayTime(self, times, N, K):
         """
@@ -69,8 +70,35 @@ class Solution:
                 dist[nei] = min(dist[nei], dist[cand_node] + d)
         ans = max(dist.values())
         return ans if ans < float('inf') else -1
+    
+    def networkDelayTime_(self, times, N, K):
+        """
+        :type times: List[List[int]]
+        :type N: int
+        :type K: int
+        :rtype: int
+        """
+        
+        graph = defaultdict(list)
+        for u, v, w in times:
+            graph[u].append((v, w))
+        
+        print(graph)
+        dist = {}
+        heap = [(0,K)]
+        while heap:
+            localDist, node = heapq.heappop(heap)
+            if node in dist:
+                continue
+            dist[node] = localDist
+            for neighbor, d in graph[node]:
+                if neighbor not in dist:
+                    heapq.heappush (heap, (localDist + d, neighbor))
+            print(dist)
+        return max(dist.values()) if len(dist) == N else -1
                 
 times = [[2,1,1],[2,3,1],[3,4,1]]
 N = 4
 K = 2
 print(Solution().networkDelayTime(times, N, K))
+print(Solution().networkDelayTime_(times, N, K))

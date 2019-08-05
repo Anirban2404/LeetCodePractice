@@ -41,10 +41,10 @@ class Solution(object):
 
         for i, num in enumerate(nums):
             cumSum += num
-            
+            print(cumSum)
             if k != 0:
                 cumSum = cumSum % k
-
+            print(cumSum)
             if cumSum not in sumDict:
                 sumDict[cumSum] = i
             else:
