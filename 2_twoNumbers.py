@@ -35,6 +35,13 @@ class Solution:
         :type l2: ListNode
         :rtype: ListNode
         """
+        if l1 is None and l2 is None:
+            return 
+        if l1 is None:
+            return l2
+        if l2 is None:
+            return l1
+        
         carry = 0
         sum = 0
         sumNode = curr = ListNode(0)

@@ -73,32 +73,36 @@ class Solution:
         """
         trees = sorted((v, r, c) for r, row in enumerate(forest) 
                         for c, v in enumerate(row) if v > 1)
-        #print(trees)
+  
+                
+        print(trees)
         sr = sc = ans = 0
-        R, C = len(forest), len(forest[0])
-        seen = {(sr, sc)}
-        def bfs(forest, sr, sc, tr, tc):
-            
-            queue = collections.deque([(sr, sc, 0)])
-            
-            while queue:
-                r, c, d = queue.popleft()
-                if r == tr and c == tc:
-                    return d
-                for nr, nc in ((r-1, c), (r+1, c), (r, c-1), (r, c+1)):
-                    if nr < 0 or nr >= R or nc < 0 or nc >= C or \
-                        forest[nr][nc] == 0 or (nr, nc) in seen:
-                        continue
-                    seen.add((nr, nc))
-                    queue.append((nr, nc, d+1))
-            return -1
-
         for _, tr, tc in trees:
-            d = bfs(forest, sr, sc, tr, tc)
-            if d < 0: return -1
+            d = self.astar(forest, sr, sc, tr, tc)
+            if d < 0:
+                return -1
             ans += d
             sr, sc = tr, tc
         return ans
+    
+    def bfs(self, forest, sr, sc, tr, tc):
+        R, C = len(forest), len(forest[0])
+        seen = {(sr, sc)}
+        queue = collections.deque([(sr, sc, 0)])
+        
+        while queue:
+            r, c, d = queue.popleft()
+            if r == tr and c == tc:
+                return d
+            for nr, nc in ((r-1, c), (r+1, c), (r, c-1), (r, c+1)):
+                if nr < 0 or nr >= R or nc < 0 or nc >= C or \
+                    forest[nr][nc] == 0 or (nr, nc) in seen:
+                    continue
+                seen.add((nr, nc))
+                queue.append((nr, nc, d+1))
+        return -1
+
+        
     
     
     
@@ -114,12 +118,13 @@ class Solution:
                     ncost = g + 1 + abs(nr - tr) + abs(nc - tc)
                     if ncost < cost.get((nr, nc), 9999):
                         cost[nr, nc] = ncost
+                        print(cost, ncost)
                         heapq.heappush(heap, (ncost, g+1, nr, nc))
         return -1
     
 forest = [
-          [1,2,3],
           [1,0,0],
-          [7,6,5]
+          [1,0,0],
+          [1,9,1]
          ]
 print(Solution().cutOffTree(forest))

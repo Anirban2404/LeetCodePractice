@@ -1,17 +1,20 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Sat Jan  5 18:17:44 2019
+Created on Sun Aug  4 21:51:47 2019
 
 @author: anirban-mac
 """
 """
-Reverse a singly linked list.
+92. Reverse Linked List II
+Reverse a linked list from position m to n. Do it in one-pass.
+
+Note: 1 ≤ m ≤ n ≤ length of list.
 
 Example:
 
-Input: 1->2->3->4->5->NULL
-Output: 5->4->3->2->1->NULL
+Input: 1->2->3->4->5->NULL, m = 2, n = 4
+Output: 1->4->3->2->5->NULL
 """
 
 class ListNode:
@@ -42,33 +45,46 @@ class myLinkedList:
             print("Empty LinkedList")
 
 class Solution:
-    def reverseList(self, head):
+    def reverseBetween(self, head, m, n):
         """
         :type head: ListNode
+        :type m: int
+        :type n: int
         :rtype: ListNode
         """
         
         if head is None:
             return None
         
-#        prev = head
-#        
-#        while head.next:
-#            curr = head.next
-#            head.next = curr.next
-#            curr.next = prev
-#            prev = curr
-#        return prev
 
-        prev = None
         cur = head
-        while cur:
+        prev = None
+        
+        while m > 1:
+            prev, cur = cur, cur.next
+            m = m - 1
+            n = n - 1
+        
+        lptr, rptr = prev, cur
+        
+        while n:
             cur.next, cur, prev = prev, cur.next, cur
-        return prev
+            n -= 1
+        
+        if lptr:
+            lptr.next = prev
+        else:
+            head = prev
+        
+        rptr.next = cur
+        return head
+            
 
 linkedList = myLinkedList()
 numbers = [1,2,3,4,5]
 head = linkedList.inputListNode(numbers)
 linkedList.printLinkedList(head)
-reversedLL = Solution().reverseList(head)
+m = 2
+n = 4
+reversedLL = Solution().reverseBetween(head, m, n)
 linkedList.printLinkedList(reversedLL)

@@ -36,18 +36,20 @@ class Solution:
         if amount == 0:
             return 0
         
-        dp = [2147483647 for _ in range(amount+1)]
+        dp = [float('inf') for _ in range(amount+1)]
         dp[0] = -1
       
         
-        for i in range(1, amount + 1):
-            for c in coins:
-                if c <= i and dp[i-c] >= -1:
-                    dp[i] = min(dp[i], dp[i-c]+1)
+        for amt in range(1, amount + 1):
+            for coin in coins:
+                if amt >= coin:
+                    print("Amt", amt)
+                    dp[amt] = min(dp[amt], dp[amt-coin]+1)
+
             print(dp)
         return dp[amount] + 1 if dp[amount] < amount else -1
     
 
-coins = [1, 2, 5]
+coins = [1, 5, 2]
 amount =  11
 print(Solution().coinChange(coins, amount))

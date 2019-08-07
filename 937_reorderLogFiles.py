@@ -57,7 +57,8 @@ class Solution:
         print()
         return sorted(logs, key = sortLog)
     
-logs = ["a1 9 2 3 1","g1 act car","zo4 4 7","ab1 off key dog","a8 act zoo"]
-logs = ["27 85717 7", "2 y xyr fc", "52 314 99", "d 046099 0", "m azv x f", 
-        "7e apw c y", "8 hyyq z p", "6 3272401", "c otdk cl", "8 ksif m u"]
+#logs = ["a1 9 2 3 1","g1 act car","zo4 4 7","ab1 off key dog","a8 act zoo"]
+#logs = ["27 85717 7", "2 y xyr fc", "52 314 99", "d 046099 0", "m azv x f", 
+#        "7e apw c y", "8 hyyq z p", "6 3272401", "c otdk cl", "8 ksif m u"]
+logs = ["ykc 82 01", "eo first qpx", "09z cat harnster", "az0 first qpx", "236 cat dog rabbit snake"]
 print(Solution().reorderLogFiles(logs))
