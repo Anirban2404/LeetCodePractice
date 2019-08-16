@@ -31,8 +31,7 @@ class ListNode(object):
 
 class Solution(object):
 
-            
-            
+        
     def isPalindrome(self, head):
         """
         :type head: ListNode
@@ -40,21 +39,28 @@ class Solution(object):
         """
         # rev records the first half, need to set the same structure as fast, 
         # slow, hence later we have rev.next
-        rev = None
-        fast = slow =head
-       
+        pre = None
+        cur = head
+        fast = head
+        
         while fast and fast.next:
             fast = fast.next.next
-            rev, rev.next, slow = slow, rev, slow.next
-            
+            cur.next, cur, pre = pre, cur.next, cur
+        
         if fast:
-            slow = slow.next
+            cur = cur.next
         
-        while rev and rev.val == slow.val:
-            slow, rev = slow.next, rev.next
-         
-        return not rev
+        ptr1 = pre
+        ptr2 = cur
         
+        while ptr1 and ptr2:
+            #print(ptr1.val,ptr2.val)
+            if ptr1.val != ptr2.val:
+                return False
+            ptr1, ptr2 = ptr1.next, ptr2.next
+           
+        return True
+    
     def stringToListNode(self, input):
         # Generate list from the input
         numbers = (input)
@@ -79,6 +85,7 @@ class Solution(object):
         else:
             print("Empty LinkedList")
     
-llist = [1,1,2,1]
+llist = [1,2,4,4,2,1]
 node = Solution().stringToListNode(llist)
 print(Solution().isPalindrome(node))
+#print(Solution().prettyPrintLinkedList(node))
