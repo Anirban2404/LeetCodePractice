@@ -40,30 +40,33 @@ Explanation:
 There is no way to connect all cities even if all edges are used.
 
 """
+# Finding Minimum spanning Tree 
 
 from collections import defaultdict
 import heapq
 class Solution:
     def minimumCost(self, N, connections):
         graph = defaultdict(list)
-        visited = set()
-        src = connections[0][0]
+        start = connections[0][0]
         for src, dst, wt in connections:
             graph[src].append((dst, wt))
-            
+            graph[dst].append((src, wt))
+         
+        print(graph)
         dist = {}
-        heap = [(0, src)]
+        heap = [(0, start)]
         while heap:
             ddist, node = heapq.heappop(heap)
+            print(ddist, node)
             if node in dist:
                 continue
             dist[node] = ddist
             for neighbor, d in graph[node]:
                 if neighbor not in dist:
-                    heapq.heappush (heap, (ddist + d, neighbor))
-            #print(dist)
-        return max(dist.values()) if len(dist) == N else -1
+                    heapq.heappush (heap, (d, neighbor))
+        print(dist)
+        return sum(dist.values()) if len(dist) == N else -1
         
-N = 4
-connections = [[1,2,5],[1,3,6],[2,3,1],[1,4,4]]
+N = 3
+connections = [[1,2,5],[1,3,6],[2,3,1]]
 print(Solution().minimumCost(N, connections))
