@@ -27,6 +27,36 @@ class Solution:
         :type s: str
         :rtype: bool
         """
+        start = 0
+        end = len(s)
+        skip = True
+        while start < end:
+            if s[start] == s[end - 1]:
+                print(s[start], s[end-1])
+                start += 1
+                end -= 1
+            else: 
+                if self.isPalindrome(s[start + 1:end]) and skip:
+                    return True
+                elif self.isPalindrome(s[start:end - 1]) and skip:
+                    return True
+                else:
+                    return False
+                skip = False
+        return True
         
-s = "abca"
+    def isPalindrome(self, s):
+        start = 0
+        end = len(s) - 1
+        print(s)
+        while start < end :
+            print(s[start], s[end])
+            if s[start] == s[end]:
+                start += 1
+                end -= 1
+            else:
+                return False
+        return True
+        
+s = "atbbga"
 print(Solution().validPalindrome(s))
