@@ -26,7 +26,6 @@ and its complement is 0. So you need to output 0.
 """
 class Solution:
     def findComplement(self, num):
-        complement = 0
         count = 0
         complement_decimal = 0
         
@@ -35,9 +34,7 @@ class Solution:
             num = num >> 1
       
             rem = 1 if rem == 0 else 0
-            
-            complement = rem * pow(2, count)
-            complement_decimal += complement 
+            complement_decimal +=  rem * pow(2, count)
             
             count += 1
         return complement_decimal
