@@ -60,7 +60,7 @@ class Solution:
                         cur.right = r
                         all_trees.append(cur)
             return all_trees
-        return generate(1,n) if n else []
+        return generate(1, n) if n else []
     
     def prettyPrintTree(self, node, prefix="", isLeft=True):
         if not node:

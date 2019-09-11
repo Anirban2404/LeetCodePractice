@@ -52,7 +52,7 @@ class Solution:
         :rtype: int
         """
 
-        min_price_local = float('-inf')
+        min_price_local = float('inf')
         max_profit_local, max_profit = 0, 0
     
         for price in prices:
