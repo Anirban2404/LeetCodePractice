@@ -102,7 +102,7 @@ class Solution:
         pathSum(root)
         return self.max_sum
         
-treelist = [1,-2,-3,1,3,-2,'null',-1]
+treelist = [7,1000,2000,-1,-3001,-1,-1,-1]
 treeNode = Solution().stringToTreeNode(treelist)
 Solution().prettyPrintTree(treeNode,"",True)
 print(Solution().maxPathSum(treeNode))
