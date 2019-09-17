@@ -65,7 +65,7 @@ class Solution:
             for col in range(row, cols):
                 #print (matrix[row][col],matrix[col][row], matrix[col][row],matrix[row][col])
                 matrix[col][row],matrix[row][col] = matrix[row][col],matrix[col][row]
-        #print(matrix)
+        print(matrix)
         
         for j in range(cols):
              matrix[j] = (list(reversed(matrix[j])))

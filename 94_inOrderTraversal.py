@@ -94,8 +94,43 @@ class Solution:
         return inOrder
         
         
-            
+    def inorderTraversalRecursive(self, root):
+        if root is None:
+            return None
+        
+        inOrder = []
+        def recurse(root):
+            if root:
+                recurse(root.left)
+                inOrder.append(root.val)
+                recurse(root.right)
+        recurse(root)
+        return inOrder
+    
+    def MorrisTraversal(self, root):
+        inOrder = []
+        node = root
+        while node:
+            if node.left is None:
+                inOrder.append(node.val)
+                node = node.right
+            else:
+                pre = node.left
+                while pre.right and pre.right != node:
+                    pre = pre.right
+                
+                if pre.right is None:
+                    pre.right = node
+                    node = node.left
+                else:
+                    pre.right = None
+                    inOrder.append(node.val)
+                    node = node.right
+        return inOrder
+        
 treelist = [1,'null',2,3]
 treeNode = Solution().stringToTreeNode(treelist)
 Solution().prettyPrintTree(treeNode,"",True)
 print(Solution().inorderTraversal(treeNode))
+print(Solution().inorderTraversalRecursive(treeNode))
+print(Solution().MorrisTraversal(treeNode))
