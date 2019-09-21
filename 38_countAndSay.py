@@ -40,7 +40,9 @@ class Solution:
         :type n: int
         :rtype: str
         """
-
+        start = 1
+        for _ in range(n):
+            
 
 n = 4
 print(Solution().countAndSay(n))
