@@ -105,6 +105,40 @@ class Solution:
                         board[row][col] = 1
                 
         return (board)
+    
+    # with no extra space
+    def gameOfLife2(self, board):
+        """
+        Do not return anything, modify board in-place instead.
+        """
+        directions = [(0,1), (0,-1), (1,0), (-1,0), (1,1), (-1,-1), (1,-1), (-1,1)]
+        nrows = len(board)
+        ncols = len(board[0])
+        
+        for row in range(nrows):
+            for col in range(ncols):
+                count = 0
+                for _dir in directions:
+                    x = row + _dir[0]
+                    y = col + _dir[1]
+                    if x < 0 or y < 0 or x >= nrows or y >= ncols:
+                        continue
+                    if abs(board[x][y]) == 1:
+                        count += 1
+                    
+                if board[row][col] == 1 and (count < 2 or count > 3):
+                    board[row][col] = -1
+                if board[row][col] == 0 and count == 3:
+                    board[row][col] = 2
+                    
+        for row in range(nrows):
+            for col in range(ncols):
+                if board[row][col] > 0:
+                    board[row][col] = 1
+                else:
+                    board[row][col] = 0
+                    
+        return board
 
 
     
@@ -113,3 +147,4 @@ class Solution:
         
 board = [[0,1,0],[0,0,1],[1,1,1],[0,0,0]]
 print(Solution().gameOfLife(board))
+print(Solution().gameOfLife2(board))
