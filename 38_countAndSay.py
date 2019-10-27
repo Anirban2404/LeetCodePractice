@@ -40,9 +40,21 @@ class Solution:
         :type n: int
         :rtype: str
         """
-        start = 1
-        for _ in range(n):
-            
+        res = '1'
+        for _ in range(n-1):
+            prev = res
+            res = ''
+            j = 0
+            while j < len(prev):
+                cur = prev[j]
+                cnt = 1
+                j += 1
+                while j < len(prev) and prev[j] == cur:
+                    cnt += 1
+                    j += 1
+                res += str(cnt) + str(cur)
+                print(res)
+        return res
 
 n = 4
 print(Solution().countAndSay(n))
