@@ -34,7 +34,7 @@ Input: 4
 Output: 3
 Explanation: F(4) = F(3) + F(2) = 2 + 1 = 3.
 """
-
+import timeit
 class Solution:
     def fib(self, N: int) -> int:
         if N == 0:
@@ -71,5 +71,5 @@ class Solution:
 
 
 N = 100
-#print(Solution().fib(N))
+print(Solution().fib(N))
 print(Solution().rec_fib(N))

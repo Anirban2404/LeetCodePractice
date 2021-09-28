@@ -1,18 +1,18 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Sat May 25 13:08:21 2019
+''' 
+Given the head of a sorted linked list, delete all duplicates such 
+that each element appears only once. Return the linked list sorted as well.
 
-@author: anirban-mac
-"""
-"""
-Remove all elements from a linked list of integers that have value val.
 
-Example:
+Example 1:
 
-Input:  1->2->6->3->4->5->6, val = 6
-Output: 1->2->3->4->5
-"""
+Input: head = [1,1,2]
+Output: [1,2]
+
+Example 2:
+
+Input: head = [1,1,2,3,3]
+Output: [1,2,3] 
+'''
 
 class ListNode:
     def __init__(self,x):
@@ -23,17 +23,16 @@ class myLinkedList:
     
     def inputListNode(self,numbers): 
         # Now convert that list into linked list
-        
+        if len(numbers) <= 0:
+            return None
         head = ListNode(numbers[0])
         ptr = head
-        
-    
         
         for number in numbers[1:]:
             ptr.next = ListNode(number)
             ptr = ptr.next
         
-        #ptr = head
+        ptr = head
         return head
         
     def printLinkedList(self,node):
@@ -46,30 +45,25 @@ class myLinkedList:
             print("Empty LinkedList")
 
 class Solution:
-    def removeElements(self, head, val):
+    def deleteDuplicates(self, head):
         """
         :type head: ListNode
         :type val: int
         :rtype: ListNode
         """
-        if head is None:
-            return None
-       
-        dummy = ListNode(0)
-        dummy.next = head
-        cur = dummy
-        
-        while cur.next:
-            if cur.next.val == val:
-                cur.next = cur.next.next
+        temp = head
+        while temp and temp.next:
+            if temp.val == temp.next.val:
+                temp.next = temp.next.next
             else:
-                cur = cur.next
-        return dummy.next
+                temp = temp.next
+        return head
+            
+            
     
 linkedList = myLinkedList()
-numbers = [1,2,3,6,4,5,6]
-val = 6
+numbers = [4,4,4,5,5]
 head = linkedList.inputListNode(numbers)
 linkedList.printLinkedList(head)
-removeddLL = Solution().removeElements(head, val)
-linkedList.printLinkedList(removeddLL)
+reultLL = Solution().deleteDuplicates(head)
+linkedList.printLinkedList(reultLL)

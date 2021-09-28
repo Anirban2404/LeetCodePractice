@@ -51,6 +51,21 @@ class Solution:
                 break
         return head
             
+    '''
+    def deleteNode(self, node):
+        """
+        :type node: ListNode
+        :rtype: void Do not return anything, modify node in-place instead.
+        """
+        # Copy the value of the next node to current node
+        # Transform {val: 5, next: {val: 1, next: {val: 9, next: None}}}
+        # to {val: 1, next: {val: 1, next: {val: 9, next: None}}}
+        node.val = node.next.val
+        # Delete next(original) node
+        # val: 1, next: {val: 9, next: None}}
+        node.next = node.next.next
+
+    '''
         
     def stringToListNode(self, input):
         # Generate list from the input

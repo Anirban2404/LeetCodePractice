@@ -51,14 +51,15 @@ class Solution:
         :type prices: List[int]
         :rtype: int
         """
-
-        min_price_local = float('inf')
-        max_profit_local, max_profit = 0, 0
-    
-        for price in prices:
-            min_price_local = min(min_price_local, price)
-            max_profit_local = max(max_profit_local, price - min_price_local)
-            max_profit = max(max_profit, max_profit_local)
+        if len(prices) <= 1:
+            return 0
+        max_profit = 0
+        min_so_far = prices[0] 
+        
+        for price in prices[1:]:
+            profit = price - min_so_far
+            max_profit = max(max_profit, profit)
+            min_so_far = min(min_so_far, price)
        
         return max_profit
             
